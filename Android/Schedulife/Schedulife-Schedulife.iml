@@ -12,48 +12,41 @@
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/Schedulife/src/main/assets" />
       </configuration>
     </facet>
-    <facet type="android-gradle" name="Android-Gradle">
-      <configuration>
-        <option name="GRADLE_PROJECT_PATH" value=":Schedulife" />
-        <option name="PROJECT_ABSOLUTE_PATH" value="C:\Users\danwk_000\Documents\GitHub\Schedulife\Android\Schedulife" />
-        <option name="GRADLE_HOME_DIR_PATH" />
-      </configuration>
-    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/Schedulife">
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/resources" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/res" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/r/debug" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/aidl/debug" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/assets" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/rs/debug" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/buildConfig/debug" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/res/rs/debug" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/r/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/aidl/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/rs/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/buildConfig/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/res/rs/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/assets" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/assets" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/res" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/r/debug" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/rs/debug" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/res" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/debug/resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/buildConfig/debug" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/res/rs/debug" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/buildConfig/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/rs/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/aidl/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/resources" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/assets" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/res" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/main/resources" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/res" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/assets" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/source/r/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Schedulife/build/res/rs/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/res" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Schedulife/src/instrumentTest/resources" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/Schedulife/build/apk" />
       <excludeFolder url="file://$MODULE_DIR$/Schedulife/build/assets" />
       <excludeFolder url="file://$MODULE_DIR$/Schedulife/build/bundles" />
@@ -69,6 +62,7 @@
     <orderEntry type="jdk" jdkName="Android SDK" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="android-support-v4" level="project" />
+    <orderEntry type="library" name="com.actionbarsherlock:actionbarsherlock:4.3.1" level="project" />
   </component>
 </module>
 

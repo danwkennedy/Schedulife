@@ -10,6 +10,7 @@ apply plugin: 'android'
 
 dependencies {
     compile files('libs/android-support-v4.jar')
+    compile group:'com.actionbarsherlock', name:'actionbarsherlock', version:'4.3.1'
 }
 
 android {
