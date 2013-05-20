@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="locations">
+        <item>Schedule</item>
+        <item>Todo</item>
+        <item>Categories</item>
+    </string-array>
+</resources>
