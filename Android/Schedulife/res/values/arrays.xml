@@ -4,4 +4,11 @@
         <item>Schedule</item>
         <item>Todo</item>
     </string-array>
+    
+    <string-array name="testCategories">
+        <item>Homework</item>
+        <item>Cleaning</item>
+        <item>Bills</item>
+    </string-array>
+    
 </resources>

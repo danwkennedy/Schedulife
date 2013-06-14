@@ -1,0 +1,171 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddTaskActivity"
+    >
+    
+    <ScrollView 
+        android:layout_alignParentTop="true"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        >
+        
+        <LinearLayout
+        android:orientation="vertical"
+        
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+    	android:paddingTop="@dimen/activity_vertical_margin"
+        >
+        
+    <EditText
+        android:id="@+id/text_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences"
+        android:hint="@string/label_name"
+        android:layout_marginBottom="@dimen/formElement_bottom_margin"
+        />
+    
+    <TextView
+        style="@style/Form.lmaas.formLabel"
+        android:id="@+id/label_category"
+        android:text="@string/label_category"
+        android:textAllCaps="true"
+        />
+    
+    <View
+        style="@style/Form.lmaas.horizontalDivider"
+        />
+    
+    <LinearLayout 
+	        android:id="@+id/layout_categories"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_marginBottom="@dimen/formElement_bottom_margin"
+	        >
+		
+        <Spinner
+            android:prompt="@string/label_category"
+	        android:id="@+id/spinner_category"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/label_category"
+        	/>
+        
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/label_unitOfTime"
+        style="@style/Form.lmaas.formLabel"
+        android:textAllCaps="true"
+        android:text="@string/label_unitOfTime"
+        />
+    
+    <View
+        style="@style/Form.lmaas.horizontalDivider"
+        />
+    
+    <SeekBar
+        android:id="@+id/seek_unitOfTime"
+        android:max="10"
+        android:progress="2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/formElement_bottom_margin"
+        />
+    
+    <TextView
+        android:id="@+id/button_addDueDate"
+        android:text="@string/button_dueDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="onDueDateClick"
+        style="@style/Form.lmaas.formButton"
+        />
+    
+    <LinearLayout
+        android:id="@+id/section_dueDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:orientation="vertical"
+        >
+    
+	    <TextView
+	        android:id="@+id/label_dueDate"
+	        style="@style/Form.lmaas.formLabel"
+	        android:text="@string/label_due"
+	        android:textAllCaps="true"
+	        />
+	    
+	    <View
+	        style="@style/Form.lmaas.horizontalDivider"
+	        />
+	        
+	    <LinearLayout 
+	        android:orientation="horizontal"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:weightSum="1.0"
+	        >
+	        
+		    <Spinner
+		        android:id="@+id/spinner_dueDate"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0.6"
+		        />
+		    
+		    <Spinner
+		        android:id="@+id/spinner_dueTime"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0.4"
+		        />
+		    
+	    </LinearLayout>
+    
+    </LinearLayout>
+    
+    </LinearLayout>
+        
+    </ScrollView>
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1.0"
+        android:background="#FFFDFDFD"
+        >
+    
+        <Button
+        android:id="@+id/button_cancel"
+        android:text="@string/action_cancel"
+        android:onClick="onCancelClick"
+        android:layout_weight="0.5"
+        style="@style/Form.lmaas.formButton"
+        />
+        
+        <View
+            style="@style/Form.lmaas.verticalDivider" 
+            />
+        
+        <Button
+        android:id="@+id/button_save"
+        android:text="@string/action_save"
+        android:onClick="onSaveClick"
+        android:layout_weight="0.5"
+        style="@style/Form.lmaas.formButton"
+        />
+        
+    </LinearLayout>
+
+</RelativeLayout>

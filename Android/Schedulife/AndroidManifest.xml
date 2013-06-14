@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.lmaas.schedulife.AddTaskActivity"
+            android:label="@string/title_activity_add_task"
+            android:parentActivityName="com.lmaas.schedulife.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lmaas.schedulife.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

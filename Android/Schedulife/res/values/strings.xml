@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	
+    <!-- General App Strings -->
     <string name="app_name">Schedulife</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Let\'s get your life on schedule!</string>
     
+    <!-- Title Strings -->
+    <string name="title_activity_add_task">Add Task</string>
+       
+    <!--  Action Strings -->
     <string name="action_prioritize">Prioritize</string>
     <string name="action_addTask">Add Task</string>
     <string name="action_showCategories">Show Categories</string>
+    <string name="action_addCategory">Add Category</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    
+    <!-- Add Task Activity Strings -->
+    <string name="label_name">Name</string>
+    <string name="label_category">Category</string>
+    <string name="label_addCategory">New</string>
+    <string name="label_due">Date due</string>
+    <string name="label_unitOfTime">Unit of time</string>
+    <string name="button_dueDate">Add due date</string>
+    <string name="label_remove">Remove</string>
+    
+    
 
 </resources>

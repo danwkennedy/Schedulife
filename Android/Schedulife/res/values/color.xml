@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="formLabel_blue">#38c0f4</color>
+    <color name="formLabel_gray">#777777</color>
+    <color name="light_gray">#aaaaaa</color>
+</resources>

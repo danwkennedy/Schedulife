@@ -8,6 +8,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
@@ -61,6 +62,7 @@ public class MainActivity extends SherlockActivity implements OnNavigationListen
 			System.out.println("Opening prioritize modal");
 			break;
 		case R.id.action_addTask:
+			startActivity(new Intent(this, AddTaskActivity.class));
 			System.out.println("Opening add task form");
 			break;
 		case R.id.action_showCategories:
