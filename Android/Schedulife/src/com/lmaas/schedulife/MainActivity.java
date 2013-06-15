@@ -60,6 +60,7 @@ public class MainActivity extends SherlockActivity implements OnNavigationListen
 		switch(item.getItemId()) {
 		case R.id.action_prioritize:
 			System.out.println("Opening prioritize modal");
+			startActivity(new Intent(this, PrioritizeActivity.class));
 			break;
 		case R.id.action_addTask:
 			startActivity(new Intent(this, AddTaskActivity.class));

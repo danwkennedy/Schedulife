@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="9"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -25,6 +25,14 @@
         <activity
             android:name="com.lmaas.schedulife.AddTaskActivity"
             android:label="@string/title_activity_add_task"
+            android:parentActivityName="com.lmaas.schedulife.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lmaas.schedulife.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.lmaas.schedulife.PrioritizeActivity"
+            android:label="@string/title_activity_prioritize"
             android:parentActivityName="com.lmaas.schedulife.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
