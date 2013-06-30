@@ -13,6 +13,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.lmaas.schedulife.sqlite.entities.Task;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -242,8 +243,10 @@ public class AddTaskActivity extends SherlockFragmentActivity {
 	
 	public void onSaveClick(View view) {
 		
+		Task task = new Task(this, 123456, "New Task", 1235456, 123456789, new Date(), null);
+		task.save();
 		
-		System.out.println();
+		System.out.println("Saved new task");
 		
 		NavUtils.navigateUpFromSameTask(this);
 	}

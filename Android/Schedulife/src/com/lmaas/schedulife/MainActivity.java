@@ -37,7 +37,7 @@ public class MainActivity extends SherlockActivity implements OnNavigationListen
     	MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.main,  menu);
         return true;
-    }   
+    }
 	
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {

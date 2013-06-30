@@ -7,6 +7,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.lmaas.schedulife.sqlite.entities.Category;
 
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -28,9 +29,9 @@ public class PrioritizeActivity extends SherlockFragmentActivity {
 
 		    final ArrayList<Category> list = new ArrayList<Category>();
 		    //TODO replace with data retrieval from database
-		    list.add(new Category(0,"Cleaning", 1));
-		    list.add(new Category(1,"Bills", 2));
-		    list.add(new Category(2, "Shopping", 3));
+		    list.add(new Category(this, 0,"Cleaning", 1));
+		    list.add(new Category(this, 1,"Bills", 2));
+		    list.add(new Category(this, 2, "Shopping", 3));
 		    
 		    final ArrayAdapter<Category> adapter = new ArrayAdapter<Category>(this,
 		        android.R.layout.simple_list_item_1, list);
