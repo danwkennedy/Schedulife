@@ -1,4 +1,4 @@
-package com.lmaas.schedulife.activities;
+package com.lmaas.schedulife;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
@@ -7,6 +7,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.lmaas.schedulife.R;
+import com.lmaas.schedulife.activities.*;
 
 import android.content.Context;
 import android.content.Intent;
