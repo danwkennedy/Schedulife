@@ -36,7 +36,7 @@
         <activity
             android:name="com.lmaas.schedulife.activities.AddTaskActivity"
             android:label="@string/title_activity_add_task"
-            android:parentActivityName="com.lmaas.schedulife.activities.MainActivity"
+            android:parentActivityName="com.lmaas.schedulife.MainActivity"
             android:windowSoftInputMode="adjustPan" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -45,7 +45,7 @@
         <activity
             android:name="com.lmaas.schedulife.activities.PrioritizeActivity"
             android:label="@string/title_activity_prioritize"
-            android:parentActivityName="com.lmaas.schedulife.activities.MainActivity" >
+            android:parentActivityName="com.lmaas.schedulife.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lmaas.schedulife.MainActivity" />
