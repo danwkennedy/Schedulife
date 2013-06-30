@@ -14,12 +14,16 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.lmaas.schedulife.R;
+import com.lmaas.schedulife.fragments.AddCategoryDialog;
+import com.lmaas.schedulife.fragments.AddCategoryDialogListener;
+import com.lmaas.schedulife.sqlite.entities.Category;
 import com.lmaas.schedulife.sqlite.entities.Task;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -32,10 +36,10 @@ import android.widget.TimePicker;
 
 import android.os.Bundle;
 
-public class AddTaskActivity extends SherlockFragmentActivity {
+public class AddTaskActivity extends SherlockFragmentActivity implements AddCategoryDialogListener {
 	
 	private List<String> _mCategories;
-	private Spinner _mDateSpinner, _mTimeSpinner;
+	private Spinner _mDateSpinner, _mTimeSpinner, _mCategoriesSpinner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -207,26 +211,25 @@ public class AddTaskActivity extends SherlockFragmentActivity {
 		
 	}
 	
-	
-
 	protected void setupCategoriesSpinner() {
 		
 		_mCategories = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.testCategories)));
 		_mCategories.add("Create new category");
 		
-		Spinner spinner = (Spinner) findViewById(R.id.spinner_category);
+		_mCategoriesSpinner = (Spinner) findViewById(R.id.spinner_category);
 		ArrayAdapter<CharSequence> adapter 
 			= new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, _mCategories.toArray(new String[0]));
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);
+		_mCategoriesSpinner.setAdapter(adapter);
 		
-		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		_mCategoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 				if (position + 1 == _mCategories.size()) {
-					System.out.println("Navigating to new category activity");
+					showAddCategoryDialog();
+					System.out.println("Show add category dialog");
 				}
 			}
 
@@ -234,6 +237,20 @@ public class AddTaskActivity extends SherlockFragmentActivity {
 			public void onNothingSelected(AdapterView<?> parent) {}			
 		});
 		
+	}
+	
+	protected void showAddCategoryDialog() {
+		FragmentManager fm = getSupportFragmentManager();
+		AddCategoryDialog addCategoryDialog = new AddCategoryDialog();
+		addCategoryDialog.show(fm, "fragment_add_category");
+	}
+	
+	public void onFinishAddCategory(boolean success, Category category) {
+		if (success) {
+			
+		} else {
+			_mCategoriesSpinner.setSelection(0);
+		}
 	}
 	
 	public void onDueDateClick(View view) {

@@ -14,5 +14,35 @@
         android:layout_marginBottom="@dimen/formElement_bottom_margin"
         />
     
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1.0"
+        android:background="#FFFDFDFD"
+        >
+    
+        <Button
+        android:id="@+id/add_category_button_cancel"
+        android:text="@string/action_cancel"
+        android:onClick="onCancelClick"
+        android:layout_weight="0.5"
+        style="@style/Form.lmaas.formButton"
+        />
+        
+        <View
+            style="@style/Form.lmaas.verticalDivider" 
+            />
+        
+        <Button
+        android:id="@+id/add_category_button_save"
+        android:text="@string/action_save"
+        android:onClick="onSaveClick"
+        android:layout_weight="0.5"
+        style="@style/Form.lmaas.formButton"
+        />
+        
+    </LinearLayout>
+    
 
 </LinearLayout>
