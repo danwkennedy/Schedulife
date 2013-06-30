@@ -1,4 +1,4 @@
-package com.lmaas.schedulife;
+package com.lmaas.schedulife.activities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +13,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.lmaas.schedulife.R;
 import com.lmaas.schedulife.sqlite.entities.Task;
 
 import android.app.DatePickerDialog;

@@ -8,9 +8,9 @@ public class Category extends SugarRecord<Category> {
 
 	private int categoryId;
 	private String name;
-	private int priority;
+	private boolean isPriority;
 	
-	public Category(Context context, int id, String name, int priority) {
+	public Category(Context context, int id, String name, boolean priority) {
 		super(context);
 		this.setName(name);
 		this.setPriority(priority);
@@ -36,12 +36,12 @@ public class Category extends SugarRecord<Category> {
 		this.name = name;
 	}
 
-	public int getPriority() {
-		return priority;
+	public boolean getPriority() {
+		return isPriority;
 	}
 
-	public void setPriority(int priority) {
-		this.priority = priority;
+	public void setPriority(boolean priority) {
+		this.isPriority = priority;
 	}
 	
 	@Override
