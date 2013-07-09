@@ -29,7 +29,9 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -40,6 +42,7 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 	
 	private List<String> _mCategories;
 	private Spinner _mDateSpinner, _mTimeSpinner, _mCategoriesSpinner;
+	private Button _mDateButton, _mTimeButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +72,15 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 		return super.onOptionsItemSelected(item);
 	}
 
-	public boolean onDueDateSpinnerClick(View view) {
+	public boolean onDueDateClick(View view) {
 		System.out.println("Due date spinner clicked");
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 		
 		return false;
 	}
+	
+	
 	
 	public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -100,14 +105,13 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 			calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 			
 			AddTaskActivity activity = (AddTaskActivity) getActivity();
-			Spinner spinner = (Spinner) activity.findViewById(R.id.spinner_dueDate);
 			DateFormat dateFormatter = DateFormat.getDateInstance(SimpleDateFormat.MEDIUM, Locale.getDefault());
-			activity.setSpinnerString(spinner, dateFormatter.format(calendar.getTime()));
+			activity.updateDueDateButton(dateFormatter.format(calendar.getTime()));
 		}
 		
 	}
 	
-	public boolean onDueTimeSpinnerClick(View view) {
+	public boolean onDueTimeClick(View view) {
 		System.out.println("Due time spinner clicked");
 		DialogFragment newFragment = new TimePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "timePicker");
@@ -135,80 +139,44 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 			calendar.set(Calendar.MINUTE, minute);
 			
 			AddTaskActivity activity = (AddTaskActivity) getActivity();
-			Spinner spinner = (Spinner) activity.findViewById(R.id.spinner_dueTime);
+//			Spinner spinner = (Spinner) activity.findViewById(R.id.spinner_dueTime);
 			DateFormat timeFormatter = DateFormat.getTimeInstance(SimpleDateFormat.SHORT, Locale.getDefault());
-			activity.setSpinnerString(spinner, timeFormatter.format(calendar.getTime()));
+			//activity.setSpinnerString(spinner, timeFormatter.format(calendar.getTime()));
+			activity.updateDueTimeButton(timeFormatter.format(calendar.getTime()));
 		}
 		
 	}
 	
-	public void setSpinnerString(Spinner spinner, String text) {
-		String[] string = { text };
-		
-		ArrayAdapter<CharSequence> adapter 
-			= new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, string);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);
-		spinner.setFocusable(false);
+//	public void setSpinnerString(Button spinner, String text) {
+//		String[] string = { text };
+//		
+//		ArrayAdapter<CharSequence> adapter 
+//			= new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, string);
+//		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//		spinner.setAdapter(adapter);
+//		spinner.setSelected(false);
+//		spinner.setFocusable(false);
+//		spinner.clearFocus();
+//	}
+	
+//	public void setButtonString(Button button, String text) {
+//		button.
+//	}
+	
+	public void updateDueDateButton(String text) {
+		_mDateButton.setText(text);
+	}
+	
+	public void updateDueTimeButton(String text) {
+		_mTimeButton.setText(text);
 	}
 	
 	protected void setupDateTimeSpinners() {
-		_mDateSpinner = (Spinner) findViewById(R.id.spinner_dueDate);
-		setSpinnerString(_mDateSpinner, DateFormat.getDateInstance(SimpleDateFormat.MEDIUM, Locale.getDefault()).format(new Date()));
+		_mDateButton = (Button) findViewById(R.id.button_setDueDate);
+		updateDueDateButton(DateFormat.getDateInstance(SimpleDateFormat.MEDIUM, Locale.getDefault()).format(new Date()));
 		
-		_mTimeSpinner = (Spinner)findViewById(R.id.spinner_dueTime);
-		setSpinnerString(_mTimeSpinner, DateFormat.getTimeInstance(SimpleDateFormat.SHORT, Locale.getDefault()).format(new Date()));
-		
-		_mDateSpinner.setOnTouchListener(new View.OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					onDueDateSpinnerClick(v);
-				}
-				return false;
-			}
-		});
-		
-		_mDateSpinner.setOnKeyListener(new View.OnKeyListener() {
-			
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-					onDueDateSpinnerClick(v);
-					return true;
-				} else {
-					return false;
-				}
-			}
-		});
-		
-		_mTimeSpinner.setOnTouchListener(new View.OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					onDueTimeSpinnerClick(v);
-				}
-				return false;
-			}
-		});
-		
-		_mTimeSpinner.setOnKeyListener(new View.OnKeyListener() {
-			
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-					onDueTimeSpinnerClick(v);
-					return true;
-				} else {
-					return false;
-				}
-			}
-		});
-		
+		_mTimeButton = (Button) findViewById(R.id.button_setDueTime);
+		updateDueTimeButton(DateFormat.getTimeInstance(SimpleDateFormat.SHORT, Locale.getDefault()).format(new Date()));
 	}
 	
 	protected void setupCategoriesSpinner() {
@@ -253,7 +221,7 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 		}
 	}
 	
-	public void onDueDateClick(View view) {
+	public void onAddDueDateClick(View view) {
 		view.setVisibility(View.GONE);
 		View dueDateSection = findViewById(R.id.section_dueDate);
 		dueDateSection.setVisibility(View.VISIBLE);
