@@ -1,7 +1,5 @@
 package com.lmaas.schedulife.fragments;
 
-import android.R.raw;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.*;
 import android.view.WindowManager.LayoutParams;

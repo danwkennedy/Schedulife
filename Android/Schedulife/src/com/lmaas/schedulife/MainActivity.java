@@ -1,36 +1,88 @@
 package com.lmaas.schedulife;
 
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.ActionBar.TabListener;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.lmaas.schedulife.R;
 import com.lmaas.schedulife.activities.*;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 
-public class MainActivity extends SherlockActivity implements OnNavigationListener {
+public class MainActivity extends SherlockFragmentActivity implements OnNavigationListener {
 
 	String[] mScheduleViews;
+	private ViewPager mViewPager;
+	private TabsAdapter mAdapter;
+	private ActionBar actionBar;
+	//private TabsAdapter
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
 		mScheduleViews = getResources().getStringArray(R.array.scheduleViews);
+		
+		mAdapter = new TabsAdapter(getSupportFragmentManager());
+		mViewPager = (ViewPager) findViewById(R.id.pager);
+		
+		mViewPager.setOnPageChangeListener(
+	            new ViewPager.SimpleOnPageChangeListener() {
+	                @Override
+	                public void onPageSelected(int position) {
+	                    // When swiping between pages, select the
+	                    // corresponding tab.
+	                    getSupportActionBar().setSelectedNavigationItem(position);
+	                }
+	            });
+		
+		mViewPager.setAdapter(mAdapter);
         
-        Context context = getSupportActionBar().getThemedContext();
-        ArrayAdapter<CharSequence> list = ArrayAdapter.createFromResource(context, R.array.scheduleViews, R.layout.sherlock_spinner_item);
-        list.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+        //Context context = getSupportActionBar().getThemedContext();
+//        ArrayAdapter<CharSequence> list = ArrayAdapter.createFromResource(context, R.array.scheduleViews, R.layout.sherlock_spinner_item);
+//        list.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
         
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        actionBar.setListNavigationCallbacks(list, (OnNavigationListener) this);
+        //ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
+        //actionBar.setListNavigationCallbacks(list, (OnNavigationListener) this);
+//        actionBar.setDisplayShowTitleEnabled(false);
+        TabListener tabListener = new TabListener() {
+			
+			@Override
+			public void onTabUnselected(Tab tab, FragmentTransaction ft) {}
+			
+			@Override
+			public void onTabSelected(Tab tab, FragmentTransaction ft) {
+				mViewPager.setCurrentItem(tab.getPosition());
+			}
+			
+			@Override
+			public void onTabReselected(Tab tab, FragmentTransaction ft) {}
+		};
+		
+		for (int i = 0; i < mScheduleViews.length; i++) {
+			String viewString = mScheduleViews[i];
+			Tab tab = actionBar.newTab();
+			tab.setText(viewString);
+			tab.setTabListener(tabListener);
+			actionBar.addTab(tab, i == 0);
+		}
+        
 	}
 
     @Override
@@ -79,4 +131,36 @@ public class MainActivity extends SherlockActivity implements OnNavigationListen
 	}
 	
     
+}
+
+class TabsAdapter extends FragmentPagerAdapter {
+
+	public TabsAdapter(FragmentManager fm) {
+		super(fm);
+	}
+
+	@Override
+	public Fragment getItem(int i) {
+		Fragment fragment = new DemoFragment(); 
+		Bundle args = new Bundle();
+		
+		args.putInt("test", i + 1);
+		fragment.setArguments(args);
+		return fragment;
+	}
+
+	@Override
+	public int getCount() {
+		return 2;
+	}
+	
+}
+
+class DemoFragment extends Fragment {
+	
+//	@Override
+//	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//		//View rootView = inflater.inflate(R.layout.f, root)
+//	}
+	
 }

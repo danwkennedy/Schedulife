@@ -5,45 +5,42 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.text.*;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.lmaas.schedulife.DateTimeFormatters;
 import com.lmaas.schedulife.R;
 import com.lmaas.schedulife.fragments.AddCategoryDialog;
 import com.lmaas.schedulife.fragments.AddCategoryDialogListener;
+import com.lmaas.schedulife.fragments.DatePickerDialogListener;
+import com.lmaas.schedulife.fragments.DatePickerFragment;
+import com.lmaas.schedulife.fragments.TimePickerDialogListener;
+import com.lmaas.schedulife.fragments.TimePickerFragment;
 import com.lmaas.schedulife.sqlite.entities.Category;
 import com.lmaas.schedulife.sqlite.entities.Task;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 
 import android.os.Bundle;
 
-public class AddTaskActivity extends SherlockFragmentActivity implements AddCategoryDialogListener {
+public class AddTaskActivity extends SherlockFragmentActivity implements AddCategoryDialogListener, DatePickerDialogListener, TimePickerDialogListener {
 	
 	private List<String> _mCategories;
-	private Spinner _mDateSpinner, _mTimeSpinner, _mCategoriesSpinner;
+	private Spinner _mCategoriesSpinner;
 	private Button _mDateButton, _mTimeButton;
-
+	
+	private Date _taskDate;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,6 +48,10 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
+		if (_taskDate == null) {
+			_taskDate = new Date();
+		}
+				
 		setupCategoriesSpinner();
 		setupDateTimeSpinners();
 	}
@@ -73,110 +74,52 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 	}
 
 	public boolean onDueDateClick(View view) {
-		System.out.println("Due date spinner clicked");
-		DialogFragment newFragment = new DatePickerFragment();
+		DialogFragment newFragment = DatePickerFragment.CreateDatePickerWithDefaults(_taskDate);
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 		
 		return false;
 	}
 	
-	
-	
-	public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceStaBundle) {
-			final Calendar calendar = Calendar.getInstance();
-			int day = calendar.get(Calendar.DAY_OF_MONTH);
-			int month = calendar.get(Calendar.MONTH);
-			int year = calendar.get(Calendar.YEAR);
-			
-			return new DatePickerDialog(getActivity(), this, year, month, day);
-		}
-		
-		@Override
-		public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
-			System.out.println("New date picked.");
-			
-			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.YEAR, year);
-			calendar.set(Calendar.MONTH, monthOfYear);
-			calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-			
-			AddTaskActivity activity = (AddTaskActivity) getActivity();
-			DateFormat dateFormatter = DateFormat.getDateInstance(SimpleDateFormat.MEDIUM, Locale.getDefault());
-			activity.updateDueDateButton(dateFormatter.format(calendar.getTime()));
-		}
-		
-	}
-	
 	public boolean onDueTimeClick(View view) {
-		System.out.println("Due time spinner clicked");
-		DialogFragment newFragment = new TimePickerFragment();
+		DialogFragment newFragment = TimePickerFragment.CreateDatePickerWithDefaults(_taskDate);
 		newFragment.show(getSupportFragmentManager(), "timePicker");
 		
 		return false;
 	}
 	
-	public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceStaBundle) {
-			final Calendar calendar = Calendar.getInstance();
-			int hour = calendar.get(Calendar.HOUR_OF_DAY);
-			int minute = calendar.get(Calendar.MINUTE);
+	public void onFinishAddCategory(boolean success, Category category) {
+		if (success) {
 			
-			return new TimePickerDialog(getActivity(), this, hour, minute, android.text.format.DateFormat.is24HourFormat(getActivity()));
+		} else {
+			_mCategoriesSpinner.setSelection(0);
 		}
-		
-		@Override
-		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			System.out.println("New time picked.");
-
-			Calendar calendar = Calendar.getInstance();
-			calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-			calendar.set(Calendar.MINUTE, minute);
-			
-			AddTaskActivity activity = (AddTaskActivity) getActivity();
-//			Spinner spinner = (Spinner) activity.findViewById(R.id.spinner_dueTime);
-			DateFormat timeFormatter = DateFormat.getTimeInstance(SimpleDateFormat.SHORT, Locale.getDefault());
-			//activity.setSpinnerString(spinner, timeFormatter.format(calendar.getTime()));
-			activity.updateDueTimeButton(timeFormatter.format(calendar.getTime()));
-		}
-		
 	}
 	
-//	public void setSpinnerString(Button spinner, String text) {
-//		String[] string = { text };
-//		
-//		ArrayAdapter<CharSequence> adapter 
-//			= new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, string);
-//		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		spinner.setAdapter(adapter);
-//		spinner.setSelected(false);
-//		spinner.setFocusable(false);
-//		spinner.clearFocus();
-//	}
-	
-//	public void setButtonString(Button button, String text) {
-//		button.
-//	}
-	
-	public void updateDueDateButton(String text) {
-		_mDateButton.setText(text);
+	public void onAddDueDateClick(View view) {
+		view.setVisibility(View.GONE);
+		View dueDateSection = findViewById(R.id.section_dueDate);
+		dueDateSection.setVisibility(View.VISIBLE);
 	}
 	
-	public void updateDueTimeButton(String text) {
-		_mTimeButton.setText(text);
+	public void onCancelClick(View view) {
+		NavUtils.navigateUpFromSameTask(this);
+	}
+	
+	public void onSaveClick(View view) {
+		Task task = new Task(this, 123456, "New Task", 1235456, 123456789, new Date(), null);
+		task.save();
+		
+		System.out.println("Saved new task");
+		
+		NavUtils.navigateUpFromSameTask(this);
 	}
 	
 	protected void setupDateTimeSpinners() {
 		_mDateButton = (Button) findViewById(R.id.button_setDueDate);
-		updateDueDateButton(DateFormat.getDateInstance(SimpleDateFormat.MEDIUM, Locale.getDefault()).format(new Date()));
+		updateDueDateButton(DateTimeFormatters.formatDate(_taskDate));
 		
 		_mTimeButton = (Button) findViewById(R.id.button_setDueTime);
-		updateDueTimeButton(DateFormat.getTimeInstance(SimpleDateFormat.SHORT, Locale.getDefault()).format(new Date()));
+		updateDueTimeButton(DateTimeFormatters.formatTime(_taskDate));
 	}
 	
 	protected void setupCategoriesSpinner() {
@@ -207,40 +150,48 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 		
 	}
 	
+	@Override
+	public void datePicked(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int month = calendar.get(Calendar.MONTH);
+		int year = calendar.get(Calendar.YEAR);
+		calendar.setTime(_taskDate);
+		calendar.set(year, month, day);
+		_taskDate = calendar.getTime();
+		
+		updateDueDateButton(DateTimeFormatters.formatDate(_taskDate));		
+	}
+	
+	public void updateDueDateButton(String text) {
+		_mDateButton.setText(text);
+	}
+	
+	@Override
+	public void timePicked(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		calendar.setTime(_taskDate);
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
+		calendar.set(Calendar.MINUTE, minute);
+		_taskDate = calendar.getTime();
+		
+		updateDueTimeButton(DateTimeFormatters.formatTime(_taskDate));
+	}
+	
+	public void updateDueTimeButton(String text) {
+		_mTimeButton.setText(text);
+	}
+	
 	protected void showAddCategoryDialog() {
 		FragmentManager fm = getSupportFragmentManager();
 		AddCategoryDialog addCategoryDialog = new AddCategoryDialog();
 		addCategoryDialog.show(fm, "fragment_add_category");
 	}
 	
-	public void onFinishAddCategory(boolean success, Category category) {
-		if (success) {
-			
-		} else {
-			_mCategoriesSpinner.setSelection(0);
-		}
-	}
-	
-	public void onAddDueDateClick(View view) {
-		view.setVisibility(View.GONE);
-		View dueDateSection = findViewById(R.id.section_dueDate);
-		dueDateSection.setVisibility(View.VISIBLE);
-	}
-	
-	public void onSaveClick(View view) {
-		
-		Task task = new Task(this, 123456, "New Task", 1235456, 123456789, new Date(), null);
-		task.save();
-		
-		System.out.println("Saved new task");
-		
-		NavUtils.navigateUpFromSameTask(this);
-	}
-	
-	public void onCancelClick(View view) {
-		NavUtils.navigateUpFromSameTask(this);
-	}
-
 }
 
 
