@@ -85,7 +85,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:onClick="onDueDateClick"
+        android:onClick="onAddDueDateClick"
         style="@style/Form.lmaas.formButton"
         />
     
@@ -115,18 +115,22 @@
 	        android:weightSum="1.0"
 	        >
 	        
-		    <Spinner
-		        android:id="@+id/spinner_dueDate"
+		    <Button
+		        android:id="@+id/button_setDueDate"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
-		        android:layout_weight="0.6"
+		        android:layout_weight="0.55"
+		        android:onClick="onDueDateClick"
+		        style="@style/TextAppearance.DateTime_SpinnerButton"
 		        />
 		    
-		    <Spinner
-		        android:id="@+id/spinner_dueTime"
+		    <Button
+		        android:id="@+id/button_setDueTime"
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
-		        android:layout_weight="0.4"
+		        android:layout_weight="0.45"
+		        android:onClick="onDueTimeClick"
+		        style="@style/TextAppearance.DateTime_SpinnerButton"
 		        />
 		    
 	    </LinearLayout>
