@@ -11,6 +11,8 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.lmaas.schedulife.R;
 import com.lmaas.schedulife.activities.*;
+import com.lmaas.schedulife.fragments.PrioritizeDialogFragment;
+import com.lmaas.schedulife.fragments.PrioritizeDialogListener;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +21,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.widget.Toast;
 
-public class MainActivity extends SherlockFragmentActivity implements OnNavigationListener {
+public class MainActivity extends SherlockFragmentActivity implements OnNavigationListener, PrioritizeDialogListener {
 
 	String[] mScheduleViews;
 	private ViewPager mViewPager;
@@ -114,7 +117,10 @@ public class MainActivity extends SherlockFragmentActivity implements OnNavigati
 		switch(item.getItemId()) {
 		case R.id.action_prioritize:
 			System.out.println("Opening prioritize modal");
-			startActivity(new Intent(this, PrioritizeActivity.class));
+			//startActivity(new Intent(this, PrioritizeActivity.class));
+			FragmentManager fm = getSupportFragmentManager();
+			PrioritizeDialogFragment prioritizeDialog = new PrioritizeDialogFragment();
+			prioritizeDialog.show(fm, "fragment_prioritize");
 			break;
 		case R.id.action_addTask:
 			startActivity(new Intent(this, AddTaskActivity.class));
@@ -128,6 +134,14 @@ public class MainActivity extends SherlockFragmentActivity implements OnNavigati
 		}		
 		
 		return false;
+	}
+
+	@Override
+	public void onSavePrioritize() {
+		// TODO reorganize schedule and todo list
+		Toast toast = Toast.makeText(this, "reorganize schedule and todo list", Toast.LENGTH_SHORT);
+		toast.show();
+		
 	}
 	
     
