@@ -29,7 +29,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import android.os.Bundle;
 
@@ -38,8 +40,12 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 	private List<String> _mCategories;
 	private Spinner _mCategoriesSpinner;
 	private Button _mDateButton, _mTimeButton;
+	private SeekBar _mIncrementSeekBar;
+	private TextView _mIncrementLabel, _mIntervalLabel;
+	
 	
 	private Date _taskDate;
+	private long _numberOfSeconds;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,7 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 				
 		setupCategoriesSpinner();
 		setupDateTimeSpinners();
+		setupIncrementSeekbar();
 	}
 
 	@Override
@@ -147,7 +154,44 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {}			
 		});
+	}
+	
+	protected void setupIncrementSeekbar() {
+		_mIncrementSeekBar = (SeekBar) findViewById(R.id.seek_intervals);
+		_mIncrementLabel = (TextView) findViewById(R.id.label_intervals);
+		_mIntervalLabel = (TextView) findViewById(R.id.label_numberOfSprints);
+		updateIncrementLabel(_mIncrementSeekBar.getProgress() + 1);
 		
+		_mIncrementSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				updateIncrementLabel(progress + 1);
+			}
+		});
+	}
+	
+	protected void updateIncrementLabel(int increments) {
+		int numberOfMinutes = increments * 15;
+		int hours = numberOfMinutes / 60;
+		int minutes = numberOfMinutes - (hours * 60);
+		StringBuilder builder = new StringBuilder(150);
+		
+		if (hours > 0)
+			builder.append(hours + (hours > 1 ? " hours " : " hour "));
+		if (minutes > 0)
+			builder.append(minutes + (minutes > 1 ? " minutes " : " minute "));
+		
+		_mIncrementLabel.setText(builder.toString());
+		_mIntervalLabel.setText(increments + " sprints of 15 minutes");
+		_numberOfSeconds = numberOfMinutes * 60;
 	}
 	
 	@Override
