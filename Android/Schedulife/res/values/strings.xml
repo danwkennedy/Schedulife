@@ -22,7 +22,7 @@
     <string name="label_category">Category</string>
     <string name="label_addCategory">New</string>
     <string name="label_due">Date due</string>
-    <string name="label_unitOfTime">Unit of time</string>
+    <string name="label_timing">Timing</string>
     <string name="button_dueDate">Add due date</string>
     <string name="label_remove">Remove</string>
     <string name="title_activity_prioritize">Prioritize</string>

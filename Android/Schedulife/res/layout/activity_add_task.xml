@@ -60,10 +60,10 @@
     </LinearLayout>
     
     <TextView
-        android:id="@+id/label_unitOfTime"
+        android:id="@+id/label_intervals"
         style="@style/Form.lmaas.formLabel"
         android:textAllCaps="true"
-        android:text="@string/label_unitOfTime"
+        android:text="@string/label_timing"
         />
     
     <View
@@ -71,12 +71,20 @@
         />
     
     <SeekBar
-        android:id="@+id/seek_unitOfTime"
-        android:max="10"
+        android:id="@+id/seek_intervals"
+        android:max="11"
         android:progress="2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        />
+    
+    <TextView
+        android:id="@+id/label_numberOfSprints"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_marginBottom="@dimen/formElement_bottom_margin"
+        android:layout_marginLeft="@dimen/formLabel_left_margin"
+        android:textColor="@color/light_gray"   
         />
     
     <TextView
