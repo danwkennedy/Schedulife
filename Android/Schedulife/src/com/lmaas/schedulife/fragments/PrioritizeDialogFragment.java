@@ -1,19 +1,18 @@
 package com.lmaas.schedulife.fragments;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
-import android.content.Context;
+import java.util.List;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
+import com.lmaas.schedulife.PrioritizeAdapter;
 import com.lmaas.schedulife.R;
 import com.lmaas.schedulife.sqlite.entities.Category;
 
@@ -21,6 +20,8 @@ public class PrioritizeDialogFragment extends SherlockDialogFragment implements 
 
 	private Button mButtonCancel, mButtonSave;
 	private ListView mList;
+	private List<Category> list;
+	private PrioritizeAdapter adapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstancestate) {
@@ -34,12 +35,9 @@ public class PrioritizeDialogFragment extends SherlockDialogFragment implements 
         mButtonSave.setOnClickListener(this);
         
         mList = (ListView) view.findViewById(R.id.prioritylistview);
-        final ArrayList<String> list = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.testCategories)));
-
-	    //TODO replace with data retrieval from database
+        list = Category.listAll(Category.class);
 	    
-	    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
-	        android.R.layout.simple_list_item_1, list);
+	    adapter = new PrioritizeAdapter(this.getActivity(),list);
 	    mList.setAdapter(adapter);
 
 	    mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,10 +60,18 @@ public class PrioritizeDialogFragment extends SherlockDialogFragment implements 
 		PrioritizeDialogListener activity = (PrioritizeDialogListener) getActivity();
 		
 		if (view.equals(mButtonSave)) {
+			savePriorities();
 			activity.onSavePrioritize();
 		}
 		//cancel button only needs to close dialog
 		this.dismiss();
+		
+	}
+
+	private void savePriorities() {
+		for(Category cat : list){
+			cat.save();
+		}
 		
 	}
 	
