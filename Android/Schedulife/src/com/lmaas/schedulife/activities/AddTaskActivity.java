@@ -95,8 +95,8 @@ public class AddTaskActivity extends SherlockFragmentActivity implements AddCate
 	}
 	
 	public void onFinishAddCategory(boolean success, Category category) {
-		if (success) {
-			
+		if (success && (category != null)) {
+			category.save();
 		} else {
 			_mCategoriesSpinner.setSelection(0);
 		}

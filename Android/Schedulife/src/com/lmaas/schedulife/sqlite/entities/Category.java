@@ -16,6 +16,12 @@ public class Category extends SugarRecord<Category> {
 		this.setPriority(priority);
 	}
 	
+	public Category(Context context, String name, boolean priority) {
+		super(context);
+		this.setName(name);
+		this.setPriority(priority);
+	}
+	
 	public Category(Context context){
 		super(context);		
 	}

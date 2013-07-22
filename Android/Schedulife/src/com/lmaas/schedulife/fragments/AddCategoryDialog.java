@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.lmaas.schedulife.R;
+import com.lmaas.schedulife.sqlite.entities.Category;
 
 public class AddCategoryDialog extends SherlockDialogFragment implements android.view.View.OnClickListener {
 	
@@ -45,7 +46,8 @@ public class AddCategoryDialog extends SherlockDialogFragment implements android
 		AddCategoryDialogListener activity = (AddCategoryDialogListener) getActivity();
 		
 		if (view.equals(mButtonSave)) {
-			activity.onFinishAddCategory(true, null);
+			Category newCat = new Category(this.getActivity(), mCategoryName.getText().toString(), false);
+			activity.onFinishAddCategory(true, newCat);
 		} else {
 			activity.onFinishAddCategory(false, null);
 		}
