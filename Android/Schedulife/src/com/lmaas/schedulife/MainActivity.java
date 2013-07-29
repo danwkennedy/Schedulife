@@ -2,7 +2,6 @@ package com.lmaas.schedulife;
 
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -12,7 +11,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.lmaas.schedulife.R;
 import com.lmaas.schedulife.activities.*;
 import com.lmaas.schedulife.fragments.PrioritizeDialogFragment;
-import com.lmaas.schedulife.fragments.PrioritizeDialogListener;
+import com.lmaas.schedulife.fragments.ScheduleFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,9 +20,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class MainActivity extends SherlockFragmentActivity implements OnNavigationListener, PrioritizeDialogListener {
+public class MainActivity extends SherlockFragmentActivity {
 
 	String[] mScheduleViews;
 	private ViewPager mViewPager;
@@ -95,23 +97,8 @@ public class MainActivity extends SherlockFragmentActivity implements OnNavigati
         inflater.inflate(R.menu.main,  menu);
         return true;
     }
-	
-	@Override
-	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-		
-		switch(itemPosition) {
-		case 0:
-			break;
-		case 1:
-			break;
-		}
-		
-		System.out.println("Changing view to: " + mScheduleViews[itemPosition]);
-		
-		return false;
-	}
-	
-	@Override
+
+    @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
 		switch(item.getItemId()) {
@@ -136,7 +123,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnNavigati
 		return false;
 	}
 
-	@Override
+//	@Override
 	public void onSavePrioritize() {
 		// TODO reorganize schedule and todo list
 		Toast toast = Toast.makeText(this, "reorganize schedule and todo list", Toast.LENGTH_SHORT);
@@ -149,32 +136,51 @@ public class MainActivity extends SherlockFragmentActivity implements OnNavigati
 
 class TabsAdapter extends FragmentPagerAdapter {
 
+	private final Fragment[] _fragments = {
+			ScheduleFragment.newInstance("Schedule"),
+			ScheduleFragment.newInstance("Todo")
+	};
+	
 	public TabsAdapter(FragmentManager fm) {
-		super(fm);
+		super(fm);		
 	}
 
 	@Override
 	public Fragment getItem(int i) {
-		Fragment fragment = new DemoFragment(); 
-		Bundle args = new Bundle();
-		
-		args.putInt("test", i + 1);
-		fragment.setArguments(args);
+		Fragment fragment = _fragments[i];
 		return fragment;
 	}
 
 	@Override
 	public int getCount() {
-		return 2;
+		return _fragments.length;
 	}
 	
 }
 
 class DemoFragment extends Fragment {
 	
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//		//View rootView = inflater.inflate(R.layout.f, root)
-//	}
+
 	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstancestate) {
+		System.out.println("New demo fragment created");
+//		LinearLayout layout = inflater.in
+		return new View(getActivity());
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		
+		System.out.println("Starting fragment");
+	}
+	
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		
+		System.out.println("Stopping fragment");
+	}
 }
